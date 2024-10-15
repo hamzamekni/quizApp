@@ -1,0 +1,25 @@
+<!-- src/app/result/result.component.html -->
+
+<div class="result-container">
+    <h1>Your Result</h1>
+    
+    <!-- Display failure message if the test was failed -->
+     @if (failed) {
+    <div class="failure-message">
+      <p>You have failed the test by exiting fullscreen mode or navigating away.</p>
+    </div>
+    }
+    <!-- Display score only if the test was not failed -->
+     @if (!failed) {
+    <div class="score">
+      <p>You answered {{ correct }} out of {{ total }} questions correctly.</p>
+      <p>Your Score: {{ percentage }}%</p>
+    </div>
+    }
+    
+    <div class="result-buttons">
+      <button (click)="retakeTest()">Retake Test</button>
+      <button (click)="goToHome()">Go to Home</button>
+    </div>
+  </div>
+  

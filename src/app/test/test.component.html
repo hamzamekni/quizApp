@@ -1,0 +1,39 @@
+<div class="test-container" #testContainer>
+    <div class="timer">
+      Time Remaining: {{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}
+    </div>
+  
+    <div class="question-section">
+      <h2>Question {{ currentQuestionIndex + 1 }} of {{ questions.length }}</h2>
+      <p>{{ questions[currentQuestionIndex].text }}</p>
+      <form>
+        @for (option of questions[currentQuestionIndex].options; track $index) {
+        <label>
+          <input
+            type="radio"
+            name="answer"
+            [value]="option.value"
+            (change)="checkAnswer($event)"
+            [disabled]="selected"
+          >
+          {{ option.label }}
+        </label>
+        }
+      </form>
+    </div>
+    @if (selected) {
+    <div class="navigation-buttons">
+        <!-- Show "Previous" button if not the first question -->
+         @if (currentQuestionIndex > 0) {
+            <button class="prev" (click)="previousQuestion()">Previous</button>
+        }
+        @if (currentQuestionIndex < questions.length - 1) {
+            <button class="next" (click)="nextQuestion()">Next</button>
+        }
+        @if (currentQuestionIndex === questions.length - 1) {
+            <button class="finish" (click)="finishTest()">Finish</button>
+        }
+    </div>
+    }
+  </div>
+  
